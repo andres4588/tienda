@@ -1,0 +1,45 @@
+delta dConexionNueva {
+	adds {
+		package org.pl.eshopping.bd;
+
+		import java.sql.Connection;
+		import java.sql.DriverManager;
+		import java.sql.SQLException;
+		import org.pl.eshopping.general.Config;
+		import java.util.Properties;
+
+		public class Conexion {
+
+			private static final String URL = Config.URL;
+			
+			private static final String USER = Config.USER;
+			private static final String PASSWORD = Config.PASSWORD;
+
+			public static Connection getConexion() {
+				Connection conexion = null;
+				try {
+
+					Properties datos = new Properties();
+					datos.put("USER", USER);
+					datos.put("PASSWORD", PASSWORD);
+					conexion = DriverManager.getConnection(URL, datos);
+					if(conexion != null) {
+						System.out.println("Conexión : Conexión a mibase satisfacoria");
+					}
+
+				}
+
+				catch(SQLException e) {
+					System.out.println("Error en la conexión, verifique, su usuario y password o el nombre de la base a la que intenta conectarse");
+					e.printStackTrace();
+				}
+				return conexion;
+
+			}
+
+		}
+
+	}
+
+}
+		
